@@ -121,6 +121,28 @@ Keys: `Esc` leaves the text field (NAV mode), `i`/`Enter` types again, `1`-`5` /
 the trace pane, `v` verbosity (INFO/DEBUG/TRACE), `p` pause, `X` clear, `L` layout (right / bottom / hidden),
 `?` help, `q` or `Ctrl-C` quit. Chat has slash-commands (`/help`). Set `RAG_LOG_FILE` to also write the trace to a file.
 
+### Ingest screen
+
+![Ingest screen](docs/screenshots/tui-ingest.png)
+
+### Search screen
+
+![Search screen](docs/screenshots/tui-search.png)
+
+### Docs screen
+
+![Docs screen](docs/screenshots/tui-docs.png)
+
+### Status screen
+
+![Status screen](docs/screenshots/tui-status.png)
+
+### Chat screen
+
+![Chat screen](docs/screenshots/tui-chat.png)
+
+![Chat with sources expanded](docs/screenshots/tui-chat-source.png)
+
 ## Collections
 
 A collection is a named group of documents (e.g. `legal`, `hr`). Every chunk stores its collection, and a document is
@@ -174,6 +196,10 @@ Auth: set `API_TOKEN` to require `Authorization: Bearer <token>` on every route 
 
 `/search` and `/chat` accept `mode`, `alpha`, `top_k`, `rerank`, `rerank_weight`, `candidates`, `source`,
 `collection`/`collections`; `/chat` also takes `history`, `summary` and `rewrite`, and returns `searched_for` and `warnings`.
+
+![Swagger UI overview](docs/screenshots/swagger-overview.png)
+
+![Chat endpoint in Swagger](docs/screenshots/swagger-chat.png)
 
 ## Notes
 
