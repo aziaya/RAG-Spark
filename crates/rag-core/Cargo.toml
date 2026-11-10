@@ -1,0 +1,30 @@
+[package]
+name = "rag-core"
+description = "RAG services: extraction, embeddings, Weaviate, retrieval, reranking, chat, observability"
+version.workspace = true
+edition.workspace = true
+
+[features]
+# docling.rs for PDF/Office/image extraction. Without it only .txt/.md/.csv can be read.
+docling = ["dep:docling"]
+
+[dependencies]
+rag-types = { path = "../rag-types" }
+anyhow = "1"
+chrono = { version = "0.4", default-features = false, features = ["clock"] }
+futures-util = "0.3"
+hex = "0.4"
+reqwest = { version = "0.13", default-features = false, features = ["json", "rustls", "stream"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+sha2 = "0.11"
+tempfile = "3"
+thiserror = "2"
+tokio = { version = "1", features = ["full"] }
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+uuid = { version = "1", features = ["v5"] }
+# docling.rs: PDF/ML (ONNX), audio and VLM support. `ort-load-dynamic` loads ONNX Runtime at
+# run time (set ORT_DYLIB_PATH), which is what makes it buildable where no prebuilt exists.
+docling = { version = "2.13.0", features = ["chunking", "ort-load-dynamic"], optional = true }
+

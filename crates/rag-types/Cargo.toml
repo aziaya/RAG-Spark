@@ -1,0 +1,15 @@
+[package]
+name = "rag-types"
+description = "Types shared by the RAG server and its clients"
+version.workspace = true
+edition.workspace = true
+
+[features]
+# Derive OpenAPI schemas (used by the server only, so clients stay light)
+openapi = ["dep:utoipa"]
+
+[dependencies]
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+walkdir = "2"
+utoipa = { version = "6", optional = true }

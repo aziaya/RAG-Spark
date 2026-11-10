@@ -1,40 +1,17 @@
-[package]
-name = "rag-pipeline"
-version = "0.1.0"
+[workspace]
+resolver = "2"
+members = ["crates/rag-types", "crates/rag-core", "crates/rag-api"]
+
+[workspace.package]
+version = "0.2.0"
 edition = "2021"
-rust-version = "1.92"
+rust-version = "1.92" # docling 1.103 (server only) requires it; the TUI itself builds on older toolchains
 
-[features]
-default = ["docling"]
-docling = ["dep:docling"]
+[profile.dev]
+# smaller build artifacts; backtraces still show file and line
+debug = "line-tables-only"
 
-[dependencies]
-anyhow = "1"
-axum = { version = "0.8", features = ["multipart"] }
-clap = { version = "4", features = ["derive", "env"] }
-dotenvy = "0.15"
-hex = "0.4"
-reqwest = { version = "0.13", default-features = false, features = ["json", "rustls", "stream"] }
-serde = { version = "1", features = ["derive"] }
-serde_json = "1"
-sha2 = "0.11"
-tempfile = "3"
-tokio = { version = "1", features = ["full"] }
-tracing = "0.1"
-tracing-subscriber = { version = "0.3", features = ["env-filter"] }
-uuid = { version = "1", features = ["v5"] }
-walkdir = "2"
-docling = { version = "2.13.0", features = ["chunking", "ort-load-dynamic"], optional = true }
-utoipa = "6"
-utoipa-swagger-ui = { version = "10", features = ["axum", "vendored"] }
-indicatif = "0.18"
-dialoguer = { version = "0.12", features = ["history", "completion", "fuzzy-select"] }
-console = "0.16"
-comfy-table = "8"
-termimad = "0.35"
-thiserror = "2"
-chrono = { version = "0.4", default-features = false, features = ["clock"] }
-ratatui = "0.30"
-crossterm = { version = "0.29", features = ["event-stream"] }
-futures-util = "0.3"
-unicode-width = "0.2"
+[profile.release]
+lto = "thin"
+codegen-units = 4
+strip = true
