@@ -1,5 +1,10 @@
 # RAG Spark
 
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Rust](https://img.shields.io/badge/rust-1.92%2B-orange?logo=rust)](https://www.rust-lang.org)
+[![Cargo workspace](https://img.shields.io/badge/cargo-workspace-informational?logo=rust)](Cargo.toml)
+[![Sponsor](https://img.shields.io/github/sponsors/aziaya?logo=githubsponsors&label=sponsor)](https://github.com/sponsors/aziaya)
+
 Blazing-fast, high-performance RAG pipeline in Rust — **HTTP API + terminal UI + CLI**, split into a Cargo workspace.
 
 Ingestion, hybrid retrieval and chat over your documents:
@@ -12,6 +17,23 @@ file -> sha256 -> unchanged? skip
 question -> (rewrite follow-up using the conversation) -> hybrid | semantic | keyword search
          -> (rerank candidates, blend with retrieval score) -> top-k passages -> chat model -> answer + sources
 ```
+
+<details>
+<summary><strong>Table of contents</strong></summary>
+
+- [Workspace layout](#workspace-layout)
+- [Interfaces](#interfaces)
+- [Setup](#setup)
+  - [Model servers](#model-servers-example-llama-server-invocations)
+- [Build & run](#build--run)
+- [The terminal UI (`rag-tui`)](#the-terminal-ui-rag-tui)
+- [Collections](#collections)
+- [Chat: follow-ups, memory, retrieval controls](#chat-follow-ups-memory-retrieval-controls)
+- [API](#api)
+- [Notes](#notes)
+- [Sponsor](#sponsor)
+
+</details>
 
 ## Workspace layout
 
@@ -208,3 +230,7 @@ Auth: set `API_TOKEN` to require `Authorization: Bearer <token>` on every route 
   together with their collection).
 - Ingestion embeds before it deletes a document's old chunks, but delete + insert is not atomic.
 - Without the `docling` feature only `.txt`, `.md` and `.csv` can be read.
+
+## Sponsor
+
+If RAG Spark is useful to you, consider [sponsoring the project](https://github.com/sponsors/aziaya) — it helps keep it maintained and growing.
