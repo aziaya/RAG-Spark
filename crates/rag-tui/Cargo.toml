@@ -1,0 +1,35 @@
+[package]
+name = "rag-tui"
+description = "Terminal client for the RAG server: chat, search, ingest and live observability"
+version.workspace = true
+edition.workspace = true
+
+[[bin]]
+name = "rag-tui"
+path = "src/main.rs"
+
+[dependencies]
+rag-types = { path = "../rag-types" }
+anyhow = "1"
+chrono = { version = "0.4", default-features = false, features = ["clock"] }
+clap = { version = "4", features = ["derive", "env"] }
+crossterm = { version = "0.29", features = ["event-stream"] }
+dotenvy = "0.15"
+futures-util = "0.3"
+ratatui = "0.30"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+tokio = { version = "1", features = ["rt-multi-thread", "macros", "time", "sync", "fs", "net", "io-util"] }
+unicode-width = "0.2"
+# HTTP client. TLS comes from the operating system on Windows and macOS (no C build dependencies),
+# and from rustls elsewhere.
+reqwest = { version = "0.13", default-features = false, features = ["json", "stream", "multipart", "query"] }
+
+[target.'cfg(any(windows, target_os = "macos"))'.dependencies]
+reqwest = { version = "0.13", default-features = false, features = ["native-tls"] }
+
+[target.'cfg(not(any(windows, target_os = "macos")))'.dependencies]
+reqwest = { version = "0.13", default-features = false, features = ["rustls"] }
+
+[dev-dependencies]
+tempfile = "3"

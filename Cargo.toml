@@ -1,6 +1,6 @@
 [workspace]
 resolver = "2"
-members = ["crates/rag-types", "crates/rag-core", "crates/rag-api"]
+members = ["crates/rag-types", "crates/rag-core", "crates/rag-api", "crates/rag-tui"]
 
 [workspace.package]
 version = "0.2.0"
